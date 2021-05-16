@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="unit_0_5">4dp</dimen>
     <dimen name="unit_1">8dp</dimen>
     <dimen name="unit_2">16dp</dimen>
     <dimen name="unit_3">24dp</dimen>
@@ -7,5 +8,6 @@
     <dimen name="unit_5">40dp</dimen>
     <dimen name="unit_6">48dp</dimen>
 
-    <dimen name="movie_recycler_title_text_size">20sp</dimen>
+    <dimen name="textSizeL">20sp</dimen>
+    <dimen name="textSizeS">14sp</dimen>
 </resources>
