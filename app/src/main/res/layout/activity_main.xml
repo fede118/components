@@ -6,8 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.section11.components.RecyclerComponent
+    <com.section11.components.recycler.RecyclerComponent
+        android:id="@+id/recycler_component"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
