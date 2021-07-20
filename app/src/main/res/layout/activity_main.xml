@@ -10,6 +10,7 @@
         android:id="@+id/recycler_component"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:recyclerComponentPlaceHolderItems="2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

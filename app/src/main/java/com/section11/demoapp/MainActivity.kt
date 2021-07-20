@@ -15,10 +15,11 @@ class MainActivity : AppCompatActivity(), RecyclerItemClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val testList = arrayListOf<ViewHolderModel>()
-        testList.add(TestDto("title 1", "https://imdb-api.com/images/original/MV5BNTlkZDQ1ODEtY2ZiMS00OGNhLWJlZDctYzY0NTFmNmQ2NDAzXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_Ratio0.6699_AL_.jpg"))
-        testList.add(TestDto("title 2", "https://imdb-api.com/images/original/MV5BNTlkZDQ1ODEtY2ZiMS00OGNhLWJlZDctYzY0NTFmNmQ2NDAzXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_Ratio0.6699_AL_.jpg"))
-        testList.add(TestDto("title 3", "https://imdb-api.com/images/original/MV5BNTlkZDQ1ODEtY2ZiMS00OGNhLWJlZDctYzY0NTFmNmQ2NDAzXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_Ratio0.6699_AL_.jpg"))
+        val testList = arrayListOf<ViewHolderModel>().apply {
+            for (i in 1..6) {
+                add(TestDto("$i", "title $i", "https://imdb-api.com/images/original/MV5BNTlkZDQ1ODEtY2ZiMS00OGNhLWJlZDctYzY0NTFmNmQ2NDAzXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_Ratio0.6699_AL_.jpg"))
+            }
+        }
 
         binding.recyclerComponent.title = "Recycler title"
         binding.recyclerComponent.bind(testList, this)
@@ -29,7 +30,15 @@ class MainActivity : AppCompatActivity(), RecyclerItemClickListener {
     }
 }
 
-internal class TestDto(private val title: String, private val image: String) : ViewHolderModel {
+internal class TestDto(
+    private val id: String,
+    private val title: String,
+    private val image: String
+) : ViewHolderModel {
+    override fun getId(): String? {
+        return id
+    }
+
     override fun getTitle(): String {
         return title
     }
