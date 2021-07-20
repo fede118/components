@@ -8,6 +8,8 @@
     <dimen name="unit_5">40dp</dimen>
     <dimen name="unit_6">48dp</dimen>
 
+    <dimen name="unit_25">200dp</dimen>
+
     <dimen name="textSizeL">20sp</dimen>
     <dimen name="textSizeS">14sp</dimen>
 </resources>

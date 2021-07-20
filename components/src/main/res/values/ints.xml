@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- SHIMMER VALUES -->
+    <integer name="shimmer_delay_ms">500</integer>
+    <integer name="shimmer_tilt_angle">25</integer>
+
+    <!-- ANIM VALUES -->
+    <integer name="anim_in_duration">300</integer>
+</resources>

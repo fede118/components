@@ -7,30 +7,56 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/view_holder_image"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/image_shimmer_container"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/unit_25"
+        android:visibility="visible"
+        android:background="@drawable/shimmer_image_place_holder"
+        app:shimmer_auto_start="true"
+        app:shimmer_tilt="@integer/shimmer_tilt_angle"
+        app:shimmer_repeat_delay="@integer/shimmer_delay_ms"
+        app:shimmer_direction="left_to_right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:viewAspectRatio="0.6699"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintTop_toTopOf="parent" >
 
-    <TextView
-        android:id="@+id/view_holder_title"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:viewAspectRatio="0.6699"
+            app:roundedCornerRadius="@dimen/unit_0_5"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/title_shimmer_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textSize="@dimen/textSizeS"
         android:layout_marginTop="@dimen/unit_0_5"
-        android:gravity="center"
+        android:background="@drawable/shimmer_image_place_holder"
+        app:shimmer_auto_start="true"
+        app:shimmer_tilt="@integer/shimmer_tilt_angle"
+        app:shimmer_repeat_delay="@integer/shimmer_delay_ms"
+        app:shimmer_direction="left_to_right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view_holder_image"
-        tools:text="Title" />
+        app:layout_constraintTop_toBottomOf="@id/image_shimmer_container">
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textSize="@dimen/textSizeS"
+            tools:text="Title" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
