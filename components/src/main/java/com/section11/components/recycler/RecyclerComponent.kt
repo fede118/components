@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.section11.components.databinding.RecyclerComponentLayoutBinding
 import com.section11.components.recycler.adapter.RecyclerAdapter
@@ -15,6 +14,7 @@ import com.section11.components.recycler.factory.RecyclerComponentConfiguration
 import com.section11.components.recycler.factory.RecyclerComponentConfigurationFactory
 import com.section11.components.recycler.listener.RecyclerItemClickListener
 import com.section11.components.recycler.model.ViewHolderModel
+import com.section11.components.smoothSnapToPosition
 
 class RecyclerComponent : ConstraintLayout {
 
@@ -104,19 +104,10 @@ class RecyclerComponent : ConstraintLayout {
             }
 
             adapter.updateItemsList(placeHolderItems)
+            binding.recyclerView.smoothSnapToPosition(ZERO)
         } else {
             adapter.updateItemsList(emptyList())
         }
-
-//        val smoothScroller: SmoothScroller = object : LinearSmoothScroller(context) {
-//            override fun getVerticalSnapPreference(): Int {
-//                return SNAP_TO_START
-//            }
-//        }
-//
-//        smoothScroller.targetPosition = 0
-//        (recycler_view.layoutManager as LinearLayoutManager).startSmoothScroll(smoothScroller)
-//         binding.recyclerView.smoothSnapToPosition(0)
     }
 
     fun setOnRecyclerItemClickedListener(listener: RecyclerItemClickListener) {
@@ -131,7 +122,6 @@ class RecyclerComponent : ConstraintLayout {
     }
 
     private fun initializeRecycler() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         adapter = dataList?.let { RecyclerAdapter(it) } ?: RecyclerAdapter(emptyList())
         binding.recyclerView.adapter = adapter
 
