@@ -18,8 +18,10 @@ jobs:
       - checkout
 
       #Giving circle ci permission
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
+      - run:
+        name: Make gradlew executable
+        command: |
+          chmod +x ./gradlew
 
       # The next step will run the unit tests
       - android/run-tests:
