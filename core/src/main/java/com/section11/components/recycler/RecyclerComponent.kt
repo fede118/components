@@ -77,29 +77,23 @@ class RecyclerComponent : ConstraintLayout {
     }
 
     private fun setRecyclerTitle(config: RecyclerComponentConfiguration) {
-        if (config.title == null) {
-            binding.recyclerTitle.visibility = View.GONE
-            return
+        binding.recyclerTitle.apply {
+            if (config.title == null) {
+                visibility = View.GONE
+                return
+            }
+            visibility = View.VISIBLE
+            text = config.title
         }
-        binding.recyclerTitle.visibility = View.VISIBLE
-        binding.recyclerTitle.text = config.title
     }
 
     private fun setPlaceHolderItems(config: RecyclerComponentConfiguration) {
         if (config.placeHolderItems > ZERO) {
             val placeHolderItems = List(config.placeHolderItems) {
                 object : ViewHolderModel {
-                    override fun getId(): String? {
-                        return null
-                    }
-
-                    override fun getTitle(): String? {
-                        return null
-                    }
-
-                    override fun getImageUrl(): String? {
-                        return null
-                    }
+                    override fun getId(): String? = null
+                    override fun getTitle(): String? = null
+                    override fun getImageUrl(): String? = null
                 }
             }
 

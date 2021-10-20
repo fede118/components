@@ -2,6 +2,7 @@ package com.section11.components.recycler.adapter
 
 import android.graphics.drawable.Animatable
 import android.net.Uri
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.common.util.UriUtil
@@ -29,31 +30,42 @@ class RecyclerViewHolder internal constructor(private val viewBinding: ViewHolde
     }
 
     override fun setTitle(title: String) {
-        viewBinding.titleShimmerContainer.hideShimmer()
-        viewBinding.titleShimmerContainer.stopShimmer()
-        viewBinding.titleShimmerContainer.background = null
+        viewBinding.titleShimmerContainer.apply {
+            hideShimmer()
+            stopShimmer()
+            background = null
+        }
 
-        viewBinding.itemTitle.text = title
-        viewBinding.itemTitle.animateIn()
+        viewBinding.itemTitle.apply {
+            text = title
+            animateIn()
+        }
 
     }
 
     override fun setImage(imageUrl: String) {
-        val controllerBuilder = Fresco.newDraweeControllerBuilder()
-        controllerBuilder.setUri(imageUrl)
-        controllerBuilder.oldController = viewBinding.itemImage.controller
-        controllerBuilder.controllerListener = object : BaseControllerListener<ImageInfo>() {
-            override fun onFinalImageSet(id: String?, imageInfo: ImageInfo?, animatable: Animatable?) {
-                super.onFinalImageSet(id, imageInfo, animatable)
-                if (viewBinding.imageShimmerContainer.isShimmerVisible) {
-                    viewBinding.imageShimmerContainer.hideShimmer()
-                    viewBinding.imageShimmerContainer.stopShimmer()
+        Fresco.newDraweeControllerBuilder().apply {
+            setUri(imageUrl)
+            oldController = viewBinding.itemImage.controller
+            controllerListener = object : BaseControllerListener<ImageInfo>() {
+                override fun onFinalImageSet(
+                    id: String?,
+                    imageInfo: ImageInfo?,
+                    animatable: Animatable?
+                ) {
+                    super.onFinalImageSet(id, imageInfo, animatable)
+                    viewBinding.imageShimmerContainer.let {
+                        if (it.isShimmerVisible) {
+                            it.hideShimmer()
+                            it.stopShimmer()
 
-                    viewBinding.itemImage.animateIn()
+                            viewBinding.itemImage.animateIn()
+                        }
+                    }
                 }
             }
+            viewBinding.itemImage.controller = this.build()
         }
-        viewBinding.itemImage.controller = controllerBuilder.build()
     }
 
     override fun showTitleLoading() {
@@ -63,14 +75,18 @@ class RecyclerViewHolder internal constructor(private val viewBinding: ViewHolde
         }
 
         viewBinding.itemTitle.text = null
-        viewBinding.titleShimmerContainer.showShimmer(true)
-        viewBinding.titleShimmerContainer.startShimmer()
+        viewBinding.titleShimmerContainer.apply {
+            showShimmer(true)
+            startShimmer()
+        }
     }
 
     override fun showImageLoading() {
         removeCurrentImage()
-        viewBinding.imageShimmerContainer.showShimmer(true)
-        viewBinding.imageShimmerContainer.startShimmer()
+        viewBinding.imageShimmerContainer.apply {
+            showShimmer(true)
+            startShimmer()
+        }
     }
 
     private fun removeCurrentImage() {
